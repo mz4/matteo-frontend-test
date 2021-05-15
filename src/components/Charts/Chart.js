@@ -1,34 +1,37 @@
-import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Legend
+} from 'recharts';
 
 const type = "monotone";
-const data = [];
 
-for (let i = 0; i < 7; i++) {
-  const time = 20 + i;
-  const valueA = Math.random() * 100;
-  const valueB = Math.random() * 40;
-  const valueC = Math.random() * 80;
-  let d = {
-    time: time,
-    valueA: valueA,
-    valueB: valueB,
-    valueC: valueC
-  };
+const Chart = ({ data }) => {
+  const times = data[0]['times'];
+  const values = [];
 
-  data.push(d);
-}
+  for (let i = 0; i < times.length; i++) {
+    let dataLoad = {};
+    dataLoad['time'] = times[i];
+    data.map((d) => {
+      dataLoad[d.metric] = d.values[i];
+    });
+    values.push(dataLoad);
+  }
 
-const Chart = () => {
   return (
     <LineChart
       width={500}
-      height={300}
-      data={data}
+      height={400}
+      data={values}
       margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
     >
-      <Line type={type} dataKey="valueA" stroke="blue" dot={true} />
-      <Line type={type} dataKey="valueB" stroke="red" dot={true} />
-      <Line type={type} dataKey="valueC" stroke="yellow" dot={true} />
+      <Legend />
+      {data.map((d) => (
+        <Line type={type} dataKey={d.metric} stroke="blue" dot={true} />
+      ))}
       <XAxis dataKey="time" />
       <YAxis />
     </LineChart>

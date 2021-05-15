@@ -1,27 +1,25 @@
-import { useState } from 'react';
-import metricsData from '../../utils/Metrics';
-
-const Metrics = () => {
-  const [data, setData] = useState(metricsData);
+const Metrics = ({ data }) => {
   return (
     <>
       <table>
-        <tr>
-          <th>
-            Metrics
-          </th>
-          <th>
-            Value
-          </th>
-        </tr>
+        <thead>
+          <tr>
+            <th>
+              Metrics
+            </th>
+            <th>
+                Value
+            </th>
+          </tr>
+        </thead>
         <tbody>
-          {data.map((m) => 
-            (
-              <tr>
-                <td>{m.Metric}</td>
-                <td>{m.Values.slice(-1)}</td>
-              </tr>
-            )
+          {data.map((m, i) =>
+          (
+            <tr key={i}>
+              <td>{m.metric}</td>
+              <td>{m.values.slice(-1)}</td>
+            </tr>
+          )
           )}
         </tbody>
       </table>
