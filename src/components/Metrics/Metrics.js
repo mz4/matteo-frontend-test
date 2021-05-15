@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import metricsData from '../utils/Metrics';
+import metricsData from '../../utils/Metrics';
 
 const Metrics = () => {
   const [data, setData] = useState(metricsData);
