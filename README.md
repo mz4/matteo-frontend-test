@@ -8,7 +8,7 @@ This project shows TK1_ metrics in a table and a chart
 
 * How to install
 ```
-npm run start
+npm i
 ```
 
 * How to run
