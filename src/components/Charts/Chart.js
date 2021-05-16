@@ -3,19 +3,21 @@ import {
   Line,
   XAxis,
   YAxis,
-  Legend
+  Legend,
+  Tooltip
 } from 'recharts';
+import getColor from '../../utils/Colors';
 
 const type = "monotone";
 
-const Chart = ({ data }) => {
+const Chart = ({ data, state }) => {
   const times = data[0]['times'];
   const values = [];
 
   for (let i = 0; i < times.length; i++) {
     let dataLoad = {};
     dataLoad['time'] = times[i];
-    data.map((d) => {
+    data.forEach((d) => {
       dataLoad[d.metric] = d.values[i];
     });
     values.push(dataLoad);
@@ -23,16 +25,29 @@ const Chart = ({ data }) => {
 
   return (
     <LineChart
-      width={500}
+      width={600}
       height={400}
       data={values}
       margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
     >
+      <Tooltip />
       <Legend />
-      {data.map((d) => (
-        <Line type={type} dataKey={d.metric} stroke="blue" dot={true} />
-      ))}
-      <XAxis dataKey="time" />
+      {data
+        .filter(d => !state.includes(d.id))
+        .map((d, i) => 
+        <Line
+          key={i}
+          type={type} 
+          dataKey={d.metric} 
+          stroke={getColor(d.id)}
+          dot={true}
+          isAnimationActive={false} 
+        />
+      )
+      }
+      <XAxis 
+        dataKey="time" 
+      />
       <YAxis />
     </LineChart>
   )

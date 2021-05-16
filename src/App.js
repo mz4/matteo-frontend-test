@@ -1,10 +1,12 @@
-import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import Metrics from './components/Metrics/Metrics';
 import Chart from './components/Charts/Chart';
+import reducer from './reducer/Reducer'
+import './App.css';
 
 const App = () => {
+  const [state, dispatch] = useReducer(reducer, []);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -19,15 +21,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>Metrics Data</div>
+      <h2>TK1 Metrics</h2>
       {data.length > 0 ?
-        <div>
-          <Metrics
-            data = {data}
-          />
-          <Chart 
-            data = {data}
-          />
+        <div className="Container">
+          <div className="Metrics">
+            <Metrics
+              data={data}
+              state={state}
+              dispatch={dispatch}
+            />
+          </div>
+          <div className="Chart">
+            <Chart 
+              data={data}
+              state={state}
+            />
+          </div>
         </div> : 
         <div>
           Loading... 
