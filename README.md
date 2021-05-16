@@ -4,6 +4,11 @@ This project shows TK1_ metrics in a table and a chart
 
 ## Getting Started
 
+### Dependencies
+
+* Before installing and running this project, download and follow instrunctions of backend repo: 
+https://github.com/mz4/matteo-backend-test
+
 ### Installing and Executing program
 
 * How to install
