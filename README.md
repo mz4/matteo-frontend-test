@@ -20,6 +20,9 @@ npm i
 ```
 npm run start
 ```
+## Demo
+
+![](demo.gif)
 
 ## Authors
 
